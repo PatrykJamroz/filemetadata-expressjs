@@ -2,14 +2,14 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config()
 
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect(process.env.MONGO_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 
 const app = express();
@@ -22,7 +22,8 @@ app.get('/', function (req, res) {
 });
 
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res) {
-  res.json({name: req.file.originalname, type: req.file.mime, size: req.file.size})
+  console.log(req.file)
+  res.json({name: req.file.originalname, type: req.file.mimetype, size: req.file.size})
 })
 
 
